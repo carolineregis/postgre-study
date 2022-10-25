@@ -10,11 +10,15 @@ SELECT nome AS "Nome do Aluno",
 	altura
 FROM aluno
 
+SELECT nome AS "Nome da criança"
+FROM aluno
+
 INSERT INTO aluno (nome) VALUES ('Gabriel Gol');
 INSERT INTO aluno (nome) VALUES ('Lula da Silva');
 INSERT INTO aluno (nome) VALUES ('Gabriel do Poço');
 INSERT INTO aluno (nome) VALUES ('Lucas Mel');
 INSERT INTO aluno (nome) VALUES ('Lucas Mal');
+INSERT INTO aluno (nome) VALUES ('Dunga da seleção');
 
 --APLICANDO FILTROS
 
@@ -42,3 +46,12 @@ WHERE nome like 'L%'
 SELECT * 
 	FROM aluno
 WHERE nome like '%l'
+
+-- usando operadores AND e OR
+SELECT * FROM aluno 
+WHERE nome LIKE 'D%'
+AND cpf IS NOT NULL
+
+SELECT * FROM aluno
+WHERE nome LIKE 'D%'
+OR nome LIKE 'G%'
