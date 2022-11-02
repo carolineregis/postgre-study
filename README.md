@@ -5,3 +5,5 @@
 
 
 🤓 Uma coleção com queries utilizadas para estudo em postgreSQL 
+
+Postgre docs -> https://www.postgresql.org/docs
