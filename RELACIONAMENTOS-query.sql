@@ -71,3 +71,59 @@ INSERT INTO aluno_curso (aluno_id, curso_id) VALUES (2,1);
 
 -- ERRO: nossa tabela reconhece que não existe um aluno com id = 3
 INSERT INTO aluno_curso (aluno_id, curso_id) VALUES (3,1);
+
+-- consulta com JOIN: Unindo dados da tabela A com dados da tabela B
+SELECT * 
+FROM aluno
+JOIN aluno_curso ON aluno_curso.aluno_id = aluno.id 
+JOIN curso ON curso.id = aluno_curso.curso_id
+
+-- matriculando o aluno em outro curso
+INSERT INTO aluno_curso VALUES (2, 2)
+
+-- fazendo consulta com alias para deixar os resultados mais claros
+SELECT aluno.nome as "aluno",
+curso.nome as "curso"
+FROM aluno 
+JOIN aluno_curso ON aluno_curso.aluno_id = aluno.id
+JOIN curso ON curso.id = aluno_curso.curso_id
+
+-- ESTUDO DE JOINS
+INSERT INTO aluno (nome) VALUES ('Arturo'); -- essa ocorrência irá aparecer na tabela aluno mas não na consulta com JOIN, pois ele não está matriculado em nenhum curso
+INSERT INTO curso (id, nome) VALUES (3, 'CSS'); -- da mesma forma, não aparece na consulta com JOIN porque não está relacionado a nenhum aluno
+
+-- LEFT JOIN -> quando existe um dado na tabela esquerda que não existe na tabela direita
+SELECT aluno.nome as "Nome do Aluno",
+curso.nome as "Nome do Curso"
+FROM aluno
+LEFT JOIN aluno_curso ON aluno_curso.aluno_id = aluno.id
+LEFT JOIN curso ON curso.id = aluno_curso.curso_id
+
+-- RIGHT JOIN -> retorno da lista com todos os cursos (a lista da direita)
+SELECT aluno.nome as "Nome do Aluno",
+curso.nome as "Nome do Curso"
+FROM aluno
+RIGHT JOIN aluno_curso ON aluno_curso.aluno_id = aluno.id
+RIGHT JOIN curso ON curso.id = aluno_curso.curso_id
+
+-- FULL JOIN -> retorna lista com todos os alunos e todos os cursos, mesmo que eles não estejam relacionados 
+SELECT aluno.nome as "Nome do Aluno",
+curso.nome as "Nome do Curso"
+FROM aluno
+FULL JOIN aluno_curso ON aluno_curso.aluno_id = aluno.id
+FULL JOIN curso ON curso.id = aluno_curso.curso_id
+
+-- CROSS JOIN -> retorna todos os dados das duas tabelas, sem passar pela tabela aluno_curso. Multiplica os dados de A pelos dados da tabela B
+SELECT aluno.nome as "Nome do Aluno",
+curso.nome as "Nome do Curso"
+FROM aluno 
+CROSS JOIN curso
+
+-- adicionando mais um aluno para testar o comportamento do CROSS JOIN
+INSERT INTO aluno (nome) VALUES ('Carosfine')
+
+-- repetindo o ultimo SELECT
+SELECT aluno.nome as "Nome do Aluno",
+       curso.nome as "Nome do Curso"
+    FROM aluno
+CROSS JOIN curso
